@@ -22,6 +22,7 @@ class BeforeOfCreateWindow(Screen):
     pass  
 
 class Menu(Screen):
+    '''Classe que representa a tela de menu'''
     def checkStatus(self):    
         try:
             with open('status.json','r') as fileJson:
@@ -43,6 +44,7 @@ class NewRegister(Screen):
     word2_input = ObjectProperty(None)
 
 class DisplayWindow(Screen):
+    '''Classe que representa a tela de exibição dos registros'''
     def on_enter(self, *args):
         self.display_records()
 
@@ -98,6 +100,7 @@ class DisplayWindow(Screen):
     #     conn.close()
 
 class MyApp(MDApp):
+    '''Classe principal do aplicativo'''
     def build(self):
         # Carrega o arquivo KV
         self.root = Builder.load_file('tela.kv')
