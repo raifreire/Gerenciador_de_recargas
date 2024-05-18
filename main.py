@@ -1,9 +1,12 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
+'''ObjectProperty - Ao criar varias telas não consigo acessar o elemento root
+pela classe principal, a funcionalidade ObjectProperty ajuda a repassar os 
+elementos necessario de classe que possui o elemento root para as outras...'''
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout  # Importar o GridLayout
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.boxlayout import BoxLayout #Importar BoxLayout
 from kivy.uix.label import Label  # Importar o módulo Label
 from kivy.core.window import Window
 import json
@@ -68,49 +71,31 @@ class DisplayWindow(Screen):
             for field in record:
                 records_table.add_widget(Label(text=str(field), color=(0, 0, 0, 1)))
 
-
-    # def display_records(self):
-    #     # Conecta ao banco de dados
+    # def show_records(self):
+    #     '''Função utilizada anteriormente para repassar os resultados, em formato 
+    #     Str() para um label de teste...'''
+    #     #create Databse Or Connect to one
     #     conn = sqlite3.connect("data.db")
+
+    #     #create a cursor
     #     c = conn.cursor()
-        
-    #     # Recupera os registros
-    #     c.execute("SELECT * FROM registers")
+
+    #     #Grab records from database
+    #     c.execute("""SELECT * FROM registers""")
     #     records = c.fetchall()
-        
-    #     # Fecha a conexão
-    #     conn.close()
-        
-    #     # Atualiza a interface com os registros
-    #     records_box = self.ids.records_box
-    #     records_box.clear_widgets()
-        
+    #     word = ''
+
+    #     #loop through results
     #     for record in records:
-    #         record_text = f"Numero: {record[0]}, Ultima Recarga: {record[1]}, Data/Hora: {record[2]}"
-    #         records_box.add_widget(Label(text=record_text, color=(0, 0, 0, 1)))
-    def show_records(self):
-        #create Databse Or Connect to one
-        conn = sqlite3.connect("data.db")
+    #         print(record)
+    #         word = f'{word}\n{record[2]}'
+    #         self.ids.data_label.text = word
 
-        #create a cursor
-        c = conn.cursor()
+    #     #commit changes
+    #     conn.commit()
 
-        #Grab records from database
-        c.execute("""SELECT * FROM registers""")
-        records = c.fetchall()
-        word = ''
-
-        #loop through results
-        for record in records:
-            print(record)
-            word = f'{word}\n{record[2]}'
-            self.ids.data_label.text = word
-
-        #commit changes
-        conn.commit()
-
-        #close connection
-        conn.close()
+    #     #close connection
+    #     conn.close()
 
 class MyApp(MDApp):
     def build(self):
