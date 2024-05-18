@@ -1,0 +1,158 @@
+<Manager>:
+    Menu:
+        name:"menu"
+    CreateWindow:
+        name:"createWindow"
+    NewRegister:
+        name: "newregister"
+    BeforeOfCreateWindow:
+        name:"beforeofcreatewindow"
+<Menu>:
+    BoxLayout:
+        orientation:"vertical"
+        padding: root.width * 0.20, root.height * 0.1
+        canvas:
+            Color:
+                rgba: 0.97,0.97,0.97,0.97
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        BoxLayout:
+            orientation:"vertical"
+            Image:
+                source: "data/logo.png"
+            Label:
+                text: "Gerenciador de Chips"
+                color: 0,0,0,1
+                bold: True
+                font_size: 30
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 30    
+            ButtonMenu:
+                text:"cadastar chip"
+                bold: True
+                font_size: 20
+                size_hint_y:None
+                height: 50
+                on_release: 
+                    app.root.current = "createWindow"
+                    app.root.transition.direction = "left"
+            ButtonMenu:
+                text:"visualizar chips"
+                bold: True
+                font_size: 20
+                size_hint_y:None
+                height: 50
+            ButtonMenu:
+                text:"alertas"
+                bold: True
+                font_size: 20
+                size_hint_y:None
+                height: 50
+                on_release: root.checkStatus()
+
+<CreateWindow>:
+    BoxLayout:
+        padding: root.width * 0.20, root.height * 0.1
+        canvas:
+            Color: 
+                rgba: 0.97,0.97,0.97,0.97
+            Rectangle:
+                pos:self.pos
+                size: self.size
+        orientation:"vertical"
+        Image:
+            source: "data/logo.png"
+        Label:
+            text: "Gerenciador de Chips"
+            color: 0,0,0,1
+            bold: True
+            font_size: 25
+        BoxLayout:
+            orientation:"vertical"
+            spacing: 20
+            ButtonMenu:
+                text:"Novo Cadastro"
+                bold: True
+                font_size: 20
+                size_hint_y: None
+                height: 50
+                on_release: 
+                    app.root.current = "newregister" 
+                    app.root.transition.direction = "left"
+            ButtonMenu:
+                text:"voltar"
+                bold: True
+                font_size: 20
+                size_hint_y: None
+                height: 50
+                on_release: 
+                    app.root.current = "menu" 
+                    app.root.transition.direction = "right" 
+                   
+<NewRegister>:
+    BoxLayout:
+        padding: root.width * 0.20, root.height * 0.1
+        canvas:
+            Color: 
+                rgba: 0.97,0.97,0.97,0.97
+            Rectangle:
+                pos:self.pos
+                size: self.size
+        orientation:"vertical"
+        
+        Label:
+            id: word_label
+            text: "Numero"
+            color: 0,0,0,1
+        TextInput:
+            id: word_input
+            multiline: False
+        Label:
+            id: word2_label
+            text: "Ultima Recarga"
+            color: 0,0,0,1
+        TextInput:
+            id: word2_input
+            multiline: False
+        Button:
+            text: "submit"
+            on_press: app.submit(word_input.text,word2_input.text)        
+        BoxLayout:
+            size_hint_y: 1
+            orientation:"vertical"
+            spacing: 20
+            BoxLayout:
+                orientation:"vertical"                
+            ButtonMenu:
+                text:"Inicio"
+                bold: True
+                font_size: 20
+                size_hint_y: None
+                height: 50
+                on_release: 
+                    app.root.current = "menu" 
+                    app.root.transition.direction = "right" 
+
+<BeforeOfCreateWindow>:
+    BoxLayout:
+        canvas:
+            Color:
+                rgba: 0.97,0.97,0.97,0.97        
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation:"vertical"            
+
+<ButtonMenu@ButtonBehavior+Label>:
+    canvas.before:
+        Color:
+            rgba: 0.1,0.5,0.7,0.9
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [20]                
+
+
+            
